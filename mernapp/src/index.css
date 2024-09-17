@@ -1,0 +1,7 @@
+#carousel{
+    max-height: 500px;
+}
+.carousel-image {
+  object-fit: contain;
+  height: 500px; /* Adjust the height as needed */
+}
