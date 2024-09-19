@@ -5,6 +5,8 @@ const User =require ("../models/User")
 
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs")
+const jwtSecret = "MynameisEndtoEndYoutubeChannel$#"
+const jwt = require("jsonwebtoken")
 
 router.post("/createuser", [
     body('email').isEmail(),
@@ -54,11 +56,19 @@ router.post("/loginuser", [
             return res.status(400).json({ errors: "Login failed. Check your credentials." });
         }
 
-        if (req.body.password !== userData.password) {
+        const pwdCompare = await bcrypt.compare(req.body.password, userData.password)
+        if (!pwdCompare) {
             return res.status(400).json({ errors: "Login failed. Check your credentials." });
         }
+        const data = {
+            user:{
+                id: userData.id //take id from mongodb
+            }
+        }
+        const authToken = jwt.sign(data, jwtSecret)
 
-        return res.json({ success: true });
+
+        return res.json({ success: true, authToken:authToken});
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal server error" });
