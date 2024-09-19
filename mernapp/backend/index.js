@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors'); // Add this for CORS handling
 const app = express();
-const port = 4000;
+const port = 4001;
 const mongoDB = require('./db');
 
 // Use cors middleware for handling CORS
