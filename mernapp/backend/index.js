@@ -23,6 +23,7 @@ app.use(express.json());
 
 // Use routes
 app.use('/api', require('./Routes/CreateUsers'));
+app.use('/api', require('./Routes/DisplayData'));
 
 // Basic route for testing
 app.get('/', (req, res) => {
