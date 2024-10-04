@@ -411,45 +411,7 @@ function Home() {
         </div>
       </div>
 
-      {/* <div className="container">
-        {foodCat.length > 0 ? (
-          foodCat.map((category, index) => (
-            <div key={index} className="row mb-3">
-              <div className="fs-3 m-3">{category.CategoryName}</div>
-              <hr />
-              
-              {foodItem.length > 0 ? (
-                foodItem
-                  .filter(
-                    (item) =>
-                      item.CategoryName === category.CategoryName &&
-                      item.name
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                  ) // Close the filter here
-                  .map((filterItems) => (
-                    <div
-                      key={filterItems._id}
-                      className="col-12 col-md-6 col-lg-3"
-                    >
-                      <Card
-                        foodName={filterItems.name}
-                        option={filterItems.options[0]}
-                        description={filterItems.description}
-                        price={filterItems.price}
-                        imgSrc={filterItems.img}
-                      />
-                    </div>
-                  ))
-              ) : (
-                <div>No items available in this category</div>
-              )}
-            </div>
-          ))
-        ) : (
-          <div>No categories available</div>
-        )}
-      </div> */}
+     
       <div className="container">
   <div className="row">
     {foodCat.length > 0 ? (
@@ -467,11 +429,10 @@ function Home() {
               .map((filterItems) => (
                 <Card
                   key={filterItems._id}
-                  foodName={filterItems.name}
+                  foodItem={filterItems}
                   option={filterItems.options[0]}
-                  description={filterItems.description}
-                  price={filterItems.price}
-                  imgSrc={filterItems.img}
+                  
+                 
                 />
               ))
           ) : (

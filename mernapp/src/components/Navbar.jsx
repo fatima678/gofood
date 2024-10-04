@@ -108,10 +108,15 @@
 
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link , useNavigate} from 'react-router-dom';
+import Badge from "react-bootstrap/Badge";
+import Modal from '../Modal.jsx';
+
+
 
 export default function Navbar() {
+  const[cartView, setCartView] = useState(false)
   // Simulating if the user is logged in based on authToken presence
   const isLoggedIn = localStorage.getItem("authToken");
   const navigate = useNavigate();
@@ -146,7 +151,11 @@ export default function Navbar() {
               {isLoggedIn ? (
                 <div>
                
-                <div className='btn bg-white text-success mx-2'>MyCart</div>
+                <div className='btn bg-white text-success mx-2' onClick={()=>{setCartView(true)}}>MyCart {"  "}
+
+                  <Badge pill bg = "danger">  2 </Badge>
+                </div>
+                {cartView? <Modal onClose={()=>setCartView(false)}><Cart></Cart></Modal>:null}
                 <div className='btn bg-white text-danger mx-2' onClick={handleLogin}>Logout</div>
                 </div>
               ) : (
