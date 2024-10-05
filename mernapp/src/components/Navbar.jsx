@@ -176,9 +176,13 @@
 import React, { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import Badge from "react-bootstrap/Badge";
+import Cart from '../screens/Cart'
+import { useCart } from "../components/ContextReducer";
+
 
 export default function Navbar() {
   const isLoggedIn = localStorage.getItem("authToken");
+  let data = useCart();
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -217,7 +221,7 @@ export default function Navbar() {
                   {/* Navigate to cart page when clicked */}
                   <div className='btn bg-white text-success mx-2' onClick={handleCartClick}>
                     MyCart {"  "}
-                    <Badge pill bg="danger"> 2 </Badge>
+                    <Badge pill bg="danger"> {data.length} </Badge>
                   </div>
                   <div className='btn bg-white text-danger mx-2' onClick={handleLogin}>Logout</div>
                 </div>

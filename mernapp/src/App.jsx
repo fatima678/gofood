@@ -57,7 +57,7 @@ import React from "react";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Signup from './screens/Signup';
-import Cart from "./components/Cart";
+import Cart from "./screens/Cart";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css'; 
