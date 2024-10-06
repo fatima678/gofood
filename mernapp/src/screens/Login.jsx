@@ -17,7 +17,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4001/api/loginuser', {
+    const response = await fetch('http://localhost:4000/api/loginuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,6 +37,7 @@ export default function Login() {
       alert("Enter valid credentials");
     } 
     if (json.success) {
+      localStorage.setItem("userEmail", credentials.email)
       localStorage.setItem("authToken", json.authToken)
       console.log(localStorage.getItem("authToken"))
      navigate("/")

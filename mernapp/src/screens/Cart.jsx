@@ -123,6 +123,42 @@ export default function Cart() {
       </div>
     );
   }
+ // Your existing checkout function
+const handleCheckOut = async () => {
+  let userEmail = localStorage.getItem("userEmail");
+
+  // Check if email is available
+  if (!userEmail) {
+      console.error("User email is missing!");
+      return; // Prevent checkout if email is not available
+  }
+
+  try {
+      let response = await fetch("http://localhost:4000/api/orderData", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              order_data: data,
+              email: userEmail,
+              order_date: new Date().toDateString(),
+          }),
+      });
+
+      // Handle response
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      let responseData = await response.json();
+      console.log('Order data:', responseData);
+
+  } catch (error) {
+      console.error('Error during checkout:', error);
+  }
+};
+
 
   // Correctly calculate the total price by multiplying price by quantity
   let totalPrice = data.reduce((total, food) => total + (food.price * food.qty), 0);
@@ -148,7 +184,7 @@ export default function Cart() {
                 <td>{food.name}</td>
                 <td>{food.qty}</td>
                 <td>{food.size}</td>
-                <td>${(food.price * food.qty).toFixed(2)}</td> {/* Display item total */}
+                <td>${(food.price * food.qty).toFixed(2)}</td> 
                 <td>
                   <button
                     type="button"
@@ -164,6 +200,9 @@ export default function Cart() {
         </table>
         <div className="text-end fw-bold fs-5">
           Total Price: ${totalPrice.toFixed(2)} {/* Format to two decimal places */}
+        </div>
+        <div>
+          <button className="btn bg-success mt-5" onClick={handleCheckOut}>Checkout</button>
         </div>
       </div>
     </div>

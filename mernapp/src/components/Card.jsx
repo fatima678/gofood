@@ -155,6 +155,7 @@
 import React, { useState } from "react";
 import { useCart, useDispatchCart } from "./ContextReducer";
 
+
 export default function Card(props) {
   let dispatch = useDispatchCart();
   let data = useCart();
@@ -164,6 +165,29 @@ export default function Card(props) {
   const [size, setSize] = useState(priceOptions[0]);  // Default to first option
 
   const handleAddToCart  = async () => {
+    let food = []
+    for(const item  of data ){
+      if(item.id === props.foodItem._id){
+        food = item;
+        break;
+      }
+    }
+    if (food.length !== 0) {
+      if (food.size === size) {
+        await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty })
+        return
+      } else if (food.size !== size) {
+        await dispatch({
+          type: "ADD",
+          id: props.foodItem._id,
+          name: props.foodItem.name,
+          price: props.option[size],  // Set the final price based on selected size
+          qty: qty,
+          size: size
+        });
+        return;
+      }
+    }
     await dispatch({
       type: "ADD",
       id: props.foodItem._id,
@@ -172,7 +196,6 @@ export default function Card(props) {
       qty: qty,
       size: size
     });
-    console.log(data);
   };
 
   return (
