@@ -63,6 +63,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css'; 
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import { CartProvider } from "./components/ContextReducer";
+import MyOrder from "./screens/MyOrder";
 
 export default function App() {
   return (
@@ -75,6 +76,7 @@ export default function App() {
             <Route exact path="/createuser" element={<Signup />} />
             {/* Adding the Cart route */}
             <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="/myOrder" element={<MyOrder />} />
           </Routes>
         </div>
       </Router>

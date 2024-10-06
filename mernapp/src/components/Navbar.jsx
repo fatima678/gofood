@@ -208,7 +208,7 @@ export default function Navbar() {
               <Link className="nav-link active fs-5" aria-current="page" to="/">Home</Link>
               {/* Display My Orders link if logged in */}
               {isLoggedIn && (
-                <Link className="nav-link active fs-5" aria-current="page" to="/myorders">
+                <Link className="nav-link active fs-5" aria-current="page" to="/myOrder">
                   My Orders
                 </Link>
               )}

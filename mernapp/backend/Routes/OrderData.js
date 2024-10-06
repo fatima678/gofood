@@ -38,6 +38,25 @@ router.post('/orderData', async (req, res) => {
         }
     }
 })
+// POST route to fetch orders by email
+
+
+router.post('/myorderData', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Find orders by email
+        const orders = await Order.find({ email: email });
+        console.log("Orders found:", orders); // Log orders for debugging
+        res.json(orders);
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+        res.status(500).json({ error: "Failed to fetch orders" });
+    }
+});
+
+
+
 module.exports = router;
 
 //6 october
